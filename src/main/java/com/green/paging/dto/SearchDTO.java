@@ -1,0 +1,32 @@
+package com.green.paging.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
+public class SearchDTO {
+	// Field
+	private	int		pageNo;		// 현재 페이지 번호 : data.go.kr에서 받은 거랑 대조하였을때 pageNo 정보
+	private	int		numOfRows;	// 페이지당 출력할 데이터 갯수 : numOfRows
+	private	int		pageSize;	// 화면하단에 출력할 페이지번호의 갯수 : 10
+								// 1 2 3 4 5 6 7 8 9 10
+	private	String	keyword;	// 검색 키워드	
+	private	String	searchType;	// 검색 유형 : title, content, writer
+	// 페이징된 검색결과 data
+	private	Pagination pagination;	// 페이지네이션 정보 
+	// Constructor : 초기값을 설정
+	public SearchDTO () {
+		this.pageNo		=	1;
+		this.numOfRows	=	10;
+		this.pageSize	=	10;
+	}
+	// 메소드 추가
+	public int getOffset () { // offset 시작점을 말하는 거임
+		return (this.pageNo -1) * this.numOfRows;
+	}
+}
