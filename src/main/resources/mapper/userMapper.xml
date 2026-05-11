@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- Windows -> preferences -> xml 검색 -> XML(wild web developer) -> download external resources ... check 표시 -->
+<!-- namespace="com.green.menus.mapper.MenuMapper" : interface 위치 -->
+<mapper namespace="com.green.users.mapper.UserMapper">
+
+	<select id ="getUserList"
+				resultType="com.green.users.dto.UserDTO">
+		SELECT 		USERID,
+							USERNAME,
+							EMAIL,
+							UPOINT,
+							TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE
+		FROM			TUSER 
+		ORDER BY  USERID ASC
+	</select>	
+
+	<select id="getUser">
+	SELECT 		USERID,
+						PASSWORD,
+  					USERNAME,
+						EMAIL,
+						UPOINT,
+						TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE
+		FROM		tuser
+		WHERE		userid = #{userid} 
+	</select>
+
+	<insert id="insertUser">
+	INSERT INTO tuser VALUES (#{userid}, #{password}, #{username}, #{email}, 0, SYSDATE)
+	</insert>
+	
+	<!-- 사용자 삭제 -->
+	<delete id="deleteUser">
+	DELETE FROM tuser WHERE userid = #{userid}
+	</delete>
+	
+	<!-- 사용자 수정 : oldpwd, arg0, param1(oldpwd자리에 param1을 쓰는게 원래임, jdk17까지는 무조건) -->
+	<update id="updateUser">
+	UPDATE tuser
+  SET	password = #{userDTO.password},
+  	  username = #{userDTO.username},
+  	  email 	 = #{userDTO.email} 
+  WHERE userid = #{userDTO.userid}
+  AND		password = #{oldpwd}
+	</update>
+	
+	<!-- 아이디 중복 확인 -->
+	<select id="getIdDupCheck">
+	SELECT 	USERID,
+					PASSWORD,
+  				USERNAME,
+					EMAIL,
+					UPOINT,
+					TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE 
+	FROM		tuser
+	WHERE		userid=#{userid}
+	</select>
+	
+	<!-- 사용자 수정 : map으로 받아서, 
+			password(정상 동작)
+			map.password와 같이 map.을 붙이면 오류발생-->
+	<update id="updateUser2">
+		UPDATE tuser
+  	SET	password = #{password},
+  	  	username = #{username},
+  	  	email 	 = #{email} 
+ 	  WHERE userid = #{userid}
+ 	  AND		password = #{oldpwd}
+	</update>
+	
+</mapper>

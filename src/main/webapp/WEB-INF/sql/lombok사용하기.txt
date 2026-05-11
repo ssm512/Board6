@@ -1,0 +1,61 @@
+Lombok -> DTO의 생성자와 Getter, Setter, ToString 자동으로 생성해준다
+
+설치
+1번 방법 - version 영향을 많이 받음, version에 따라 error가 많이 발생한다
+https://projectlombok.org/download
+lombok.jar
+더블클릭해서 실행
+specify location에서 d드라이브에 있는 sts 경로를 찾아서 sts.exe 파일을 선택하고 install 하면 끝
+
+결과 
+sts.exe 위치에 lombok.jar를 복사하고
+sts.ini 파일의 마지막에 '-javaagent:D:\dev\sts-5.0.1.RELEASE\lombok.jar' 추가한거임
+
+
+
+2번 방법 - error가 적음
+https://projectlombok.org/setup/eclipse
+plugin으로 설치하는 방법
+sts -> help 탭에서 -> install new software -> Work with 란에 https://projectlombok.org/p2
+입력하면 밑에 Lombok 체크박스가 생김 -> 체크하고 -> trust artifact 모두 체크하고 finish -> restart 버튼클릭
+
+사용하려면
+build.gradle에 dependcies 추가해야됨 ( 우리는 project 생성할 때 추가해놓았음 )
+
+dependencies {
+...
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+...
+}
+
+사용 예시
+
+package com.green.board.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+//@Data // Getter,Setter,ToSting,HashCode,Equals,Constructor-BoardDTO()
+//@Data - JPA 사용시 주의가 필요하다 toString() -> 문제로
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor // 기본 생성자
+@AllArgsConstructor // 모든 인자 생성자
+public class BoardDTO {
+	//Field
+	private int idx;
+	private String menu_id;
+	private String title;
+	private String content;
+	private String writer;
+	private String regdate;
+	private int	hit;
+}
+	
