@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class SearchDTO {
 	// Field
-	private	int		pageNo;		// 현재 페이지 번호 : data.go.kr에서 받은 거랑 대조하였을때 pageNo 정보
+	private	int		pageNo;		// 현재 페이지 번호 : nowpage, data.go.kr에서 받은 거랑 대조하였을때 pageNo 정보
 	private	int		numOfRows;	// 페이지당 출력할 데이터 갯수 : numOfRows
 	private	int		pageSize;	// 화면하단에 출력할 페이지번호의 갯수 : 10
 								// 1 2 3 4 5 6 7 8 9 10
@@ -19,7 +19,7 @@ public class SearchDTO {
 	private	String	searchType;	// 검색 유형 : title, content, writer
 	// 페이징된 검색결과 data
 	private	Pagination pagination;	// 페이지네이션 정보 
-	// Constructor : 초기값을 설정
+	// 기본 Constructor : 초기값을 설정
 	public SearchDTO () {
 		this.pageNo		=	1;
 		this.numOfRows	=	10;

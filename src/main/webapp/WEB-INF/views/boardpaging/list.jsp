@@ -55,6 +55,11 @@
    		}
    	}
    }
+   #search {
+   	text-align: center;
+   	width : 40%;
+   	margin : 10px auto;
+   }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
@@ -88,6 +93,20 @@
 			</tr>
 			</c:forEach>
 		</table>
+		
+		<form action="/BoardPaging/List" method="get">
+	  <input type="hidden" name="menu_id" value="${ menu_id }" />	  
+	  <input type="hidden" name="nowpage" value="${ nowpage }" />	  
+	  <div id="search">
+	    <select name="searchType">
+	      <option value="title">제목</option> 
+	      <option value="content">내용</option> 
+	      <option value="writer">작성자</option> 
+	    </select>
+	    <input type="text" name="keyword" />
+	    <input type="submit" value="검색" />	    
+	  </div>
+	  </form>
 		
 		<%@include file="/WEB-INF/include/paging.jsp" %>
 	</main>
