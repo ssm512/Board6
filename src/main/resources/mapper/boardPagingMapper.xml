@@ -48,4 +48,35 @@
 	  OFFSET  #{ offset }  ROWS  FETCH  NEXT  #{ numOfRows }  ROWS ONLY 
 	
 	</select>
+	
+	<select id="getBoard">
+		SELECT
+	     IDX,
+	     MENU_ID,
+	     TITLE,
+	     CONTENT,
+	     WRITER,
+	     TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE,
+	     HIT
+	  FROM 
+	     BOARD
+	  WHERE
+	  	IDX = ${idx}
+	</select>
+	
+	<insert id="insertBoard">
+	INSERT INTO board (
+    IDX,
+    MENU_ID,
+    TITLE,
+    CONTENT,
+    WRITER
+	) VALUES ( 
+    (SELECT NVL(MAX(IDX),0)+1 FROM BOARD),
+    #{menu_id},
+    #{title},
+    #{content},
+    #{writer}
+	)
+	</insert>
 </mapper>

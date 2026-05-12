@@ -17,11 +17,11 @@
 	<form action="/Users/Login" method="post">
   <div class="mb-3">
     <label for="userid" class="form-label">아이디</label>
-    <input type="text" class="form-control" name="userid" id="userid" >
+    <input type="text" class="form-control" name="userid" id="userid" value="admin">
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" id="password">
+    <input type="password" class="form-control" name="password" id="password" value="1234">
   </div>
   
   <button type="submit" class="btn btn-primary">Submit</button>

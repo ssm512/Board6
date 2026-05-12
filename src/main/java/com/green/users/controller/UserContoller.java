@@ -142,7 +142,7 @@ public class UserContoller {
 		 */
 		
 		// 방법2 - 20260506
-		session.setAttribute("first", true);
+		session.setAttribute("first", "true");
 		
 		mv.setViewName("users/idcheck");
 		return mv;
@@ -243,8 +243,8 @@ public class UserContoller {
 		
 		HttpSession session	=	request.getSession();
 		session.setAttribute("login", user);
-		
-		return "redirect:/Board/List?menu_id=MENU01";
+		String	loc	=	session.getAttribute("loc") + "";
+		return "redirect:" + loc;
 	}
 	
 

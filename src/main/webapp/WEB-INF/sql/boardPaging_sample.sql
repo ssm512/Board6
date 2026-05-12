@@ -44,3 +44,11 @@ CREATE INDEX IDX_BOARD_MENU_IDX
 ON BOARD (MENU_ID, IDX DESC);
 
 이 인덱스는 MENU_ID별 게시글 목록을 최신순으로 가져올 때 유리합니다.
+
+-------------
+로그인 후 데이터 수정, 삭제를 위해 작성자를 변경
+UPDATE BOARD
+SET     WRITER = 'admin'
+WHERE   MENU_ID = 'MENU01'
+  AND   WRITER  IN  ('user194', 'user195', 'user196', 'user197', 'user198', 'user199', 'user200');
+  COMMIT;
