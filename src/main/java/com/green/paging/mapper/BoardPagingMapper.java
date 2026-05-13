@@ -17,6 +17,12 @@ public interface BoardPagingMapper {
 	BoardDTO getBoard(BoardDTO boardDTO);
 
 	void insertBoard(BoardDTO boardDTO);
+
+	void deleteBoard(BoardDTO boardDTO);
+
+	void incHit(BoardDTO boardDTO);
+
+	void updateBoard(BoardDTO boardDTO);
 	
 	
 }

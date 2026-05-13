@@ -64,19 +64,39 @@
 	  	IDX = ${idx}
 	</select>
 	
+	<!-- idx의 조회수를 증가 -->
+	<update id="incHit">
+		UPDATE BOARD
+	  SET	HIT = HIT + 1
+	  WHERE IDX = #{idx}
+	</update>
+	
+	
 	<insert id="insertBoard">
-	INSERT INTO board (
-    IDX,
-    MENU_ID,
-    TITLE,
-    CONTENT,
-    WRITER
-	) VALUES ( 
-    (SELECT NVL(MAX(IDX),0)+1 FROM BOARD),
-    #{menu_id},
-    #{title},
-    #{content},
-    #{writer}
-	)
+		INSERT INTO BOARD (
+	    IDX,
+	    MENU_ID,
+	    TITLE,
+	    CONTENT,
+	    WRITER
+		) VALUES ( 
+	    (SELECT NVL(MAX(IDX),0)+1 FROM BOARD),
+	    #{menu_id},
+	    #{title},
+	    #{content},
+	    #{writer}
+		)
 	</insert>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD WHERE IDX = #{idx}
+	</delete>
+	
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET		TITLE = #{title},
+					CONTENT = #{content}
+		WHERE	IDX = #{idx}
+	</update>
+	
 </mapper>

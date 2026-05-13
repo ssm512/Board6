@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BoardPagingWrite</title>
+<title>BoardPagingUpdate</title>
 <link href="/css/common.css" rel="stylesheet">
 <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
 <style>
@@ -50,29 +50,30 @@
 	<main>
 	<%@include file="/WEB-INF/include/menuspaging.jsp" %>
 	
-		<h2>${menu_name}새글쓰기</h2>
-		<form action="/BoardPaging/Write" method="post">
+		<h2>${menu_name}게시글 수정</h2>
+		<form action="/BoardPaging/Update" method="post">
 		<input type="hidden" name="menu_id" value="${menu_id}" />
 		<input type="hidden" name="nowpage" value="${nowpage}" />
+		<input type="hidden" name="idx" value="${board.idx}" />
 			<table id="table1">
 				<tr>
 					<td><span class='red'>*</span>제목</td>
 					<td>
-					<input type="text" name="title"/>
+					<input type="text" name="title" value="${board.title }"/>
 					</td>
 				</tr>
 				<tr>
 					<td><span class='red'>*</span>작성자</td>
-					<td><input type="text" name="writer" value="${sessionScope.login.userid}"/></td>
+					<td><input type="text" name="writer" value="${sessionScope.login.userid}" readonly/></td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><textarea name="content"></textarea></td>
+					<td><textarea name="content" placeholder="${board.content }"></textarea></td>
 				</tr>
 				
 				<tr>
 					<td colspan="4">
-						<input type="submit" value="추가"/>
+						<input type="submit" value="수정"/>
 						<input type="button" value="목록" 
 						onclick ="window.location.href='/BoardPaging/List?menu_id=${menu_id}&nowpage=${nowpage}'"/>
 					</td>
