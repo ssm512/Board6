@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="/css/common.css" rel="stylesheet">
 </head>
 <body>
@@ -30,10 +32,40 @@
     <div>
     	${ sessionScope.login.username }님 환영합니다.<br>
     	당신의 가입일은 ${ sessionScope.login.regdate } 입니다.<br>
-    	<a href="/Users/LoginForm" >로그인</a>
-    	<a href="/Users/Logout" >로그아웃</a>
+    	<c:choose>
+    		<c:when test="${sessionScope.login ne null }">
+	    		<a href="/Users/Logout" >로그아웃</a>
+	    	</c:when>
+	    	<c:otherwise>
+	    		<a href="/Users/LoginForm" >로그인</a><br>
+	    	</c:otherwise>
+    	</c:choose>
+    </div>
+    <div>&nbsp;</div>
+    <div>
+    <input type="text" id="num" value="1" />
+    <a href="https://www.nate.com" id="btnNate" class="btn btn-primary" target="_blanck">click</a>
     </div>
   </main>
   
+  <script>
+  	const btnNateEl = document.querySelector('#btnNate')
+  	const numEl = document.querySelector('#num')
+  	/* btnNateEl.onclick = function (e) {
+	  	if (numEl.value == '2'){
+  			e.preventDefault()	// 기본이벤트 취소
+	  		e.stopPropagation()	// 
+	  	} 
+  	}*/
+	  	btnNateEl.onclick = function (e) {
+	  		e.preventDefault()	// 기본이벤트 취소
+	  		e.stopPropagation()	//
+	  		if (numEl.value =='2') { // num이 2를 입력 받을때 페이지 이동을 시행하라
+	  			location.href = this.href // this.href == e.target.href
+	  		}
+	  	}
+	  	
+  	
+  </script>
 </body>
 </html>

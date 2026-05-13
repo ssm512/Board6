@@ -23,5 +23,7 @@ public interface UserMapper {
 	UserDTO getIdDupCheck(UserDTO userDTO);
 
 	void updateUser2(Map<String, Object> map);
+
+	UserDTO getLogin(UserDTO userDTO);
 	
 }

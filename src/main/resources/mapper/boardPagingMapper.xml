@@ -50,7 +50,7 @@
 	</select>
 	
 	<select id="getBoard">
-		SELECT
+	 SELECT
 	     IDX,
 	     MENU_ID,
 	     TITLE,
@@ -58,33 +58,33 @@
 	     WRITER,
 	     TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE,
 	     HIT
-	  FROM 
+	 FROM 
 	     BOARD
-	  WHERE
-	  	IDX = ${idx}
+	 WHERE
+	  	 IDX = ${idx}
 	</select>
 	
 	<!-- idx의 조회수를 증가 -->
 	<update id="incHit">
-		UPDATE BOARD
-	  SET	HIT = HIT + 1
-	  WHERE IDX = #{idx}
+		UPDATE 	BOARD
+	  SET			HIT = HIT + 1
+	  WHERE 	IDX = #{idx}
 	</update>
 	
 	
 	<insert id="insertBoard">
 		INSERT INTO BOARD (
-	    IDX,
-	    MENU_ID,
-	    TITLE,
-	    CONTENT,
-	    WRITER
+		    IDX,
+		    MENU_ID,
+		    TITLE,
+		    CONTENT,
+		    WRITER
 		) VALUES ( 
-	    (SELECT NVL(MAX(IDX),0)+1 FROM BOARD),
-	    #{menu_id},
-	    #{title},
-	    #{content},
-	    #{writer}
+		    (SELECT NVL(MAX(IDX),0)+1 FROM BOARD),
+		    #{menu_id},
+		    #{title},
+		    #{content},
+		    #{writer}
 		)
 	</insert>
 	

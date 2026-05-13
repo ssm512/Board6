@@ -88,7 +88,7 @@
     <!-- 메뉴 출력 -->
 	  <%@include file="/WEB-INF/include/menuspaging.jsp" %> 
     
-    <h2>게시글 내용 보기</h2>
+    <h2 class=".h2"><b id="mname">${menu_name}</b>게시글 내용 보기</h2>
      <table id="table1">
       <tr>
         <td>글 번호</td>
@@ -131,6 +131,10 @@
      </table>    
      	     
   </main>
-   
+  <script>
+		const mnameEl		=	document.querySelector('#mname');
+		let		menunameEl	=	document.querySelector('.menu .active');
+		mnameEl.innerHTML = menunameEl.innerHTML;
+	</script>
 </body>
 </html>    

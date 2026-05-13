@@ -239,12 +239,19 @@ public class UserContoller {
 	@RequestMapping("/Login")
 	public	String	login (UserDTO userDTO, HttpServletRequest request) {
 		
-		UserDTO user = userMapper.getUser(userDTO);
+		UserDTO user = userMapper.getLogin(userDTO);
 		
 		HttpSession session	=	request.getSession();
 		session.setAttribute("login", user);
-		String	loc	=	session.getAttribute("loc") + "";
-		return "redirect:" + loc;
+		String loc	=	""; 
+		// http://localhost:8080/ 즉 "/" 주소가 이전주소 일때는 
+		// 이전 주소 : session.getAttribute("loc") -> null이다, 이동주소 : /Users/null 로 인식
+		if(session.getAttribute("loc") == null)
+			loc = "redirect:/";
+		else
+			loc	=	"redirect:"+session.getAttribute("loc").toString();
+		System.out.println("loc : " + loc); // 이전 주소 확인
+		return loc;
 	}
 	
 

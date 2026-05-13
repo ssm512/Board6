@@ -67,7 +67,7 @@
 	<main>
 		<%@include file="/WEB-INF/include/menuspaging.jsp" %>
 		
-	  <h2 class=".h2">게시물 목록 ${menu.menu_name}</h2> <!-- menu라는 객체에서 menu_name을 뽑는겨, menu.getMenu_name -->
+	  <h2 class=".h2"><b id="mname">${menu.menu_name}</b>게시물 목록</h2> <!-- menu라는 객체에서 menu_name을 뽑는겨, menu.getMenu_name -->
 		<table id="list" class="table table-hover">
 			<tr>
 				<td>번호</td>
@@ -110,5 +110,11 @@
 		
 		<%@include file="/WEB-INF/include/paging.jsp" %>
 	</main>
+	<!-- javascript -->
+	<script>
+		const mnameEl		=	document.querySelector('#mname');
+		let		menunameEl	=	document.querySelector('.menu .active'); 
+		mnameEl.innerHTML = menunameEl.innerHTML;
+	</script>
 </body>
 </html>

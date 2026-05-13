@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BoardPagingUpdate</title>
+<title>BoardPagingUpdate2</title>
 <link href="/css/common.css" rel="stylesheet">
 <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
 <style>
@@ -51,34 +51,24 @@
 	<%@include file="/WEB-INF/include/menuspaging.jsp" %>
 	
 		<h2 class=".h2"><b id="mname">${menu_name}</b>게시글 수정</h2>
-		<form action="/BoardPaging/Update" method="post">
+		<form action="/BoardPaging/Update2" method="post">
 		<input type="hidden" name="menu_id" value="${menu_id}" />
 		<input type="hidden" name="nowpage" value="${nowpage}" />
 		<input type="hidden" name="idx" value="${board.idx}" />
 			<table id="table1">
 				<tr>
-					<td>번호</td>
-					<td>${ board.idx }</td>
-					<td>조회수</td>
-					<td>${ board.hit }</td>
-				</tr>
-				<tr>
-					<td>작성자</td>
-					<td>${ board.writer }</td>
-					<td>작성일</td>
-					<td>${ board.regdate }</td>
-				</tr>
-				<tr>
 					<td><span class='red'>*</span>제목</td>
-					<td colspan="3">
-					<input type="text" name="title" value="${board.title}"/>
+					<td>
+					<input type="text" name="title" value="${board.title }"/>
 					</td>
+				</tr>
+				<tr>
+					<td><span class='red'>*</span>작성자</td>
+					<td><input type="text" name="writer" value="${sessionScope.login.userid}" readonly/></td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td colspan="3">
-					<textarea name="content" >${board.content}</textarea>
-					</td>
+					<td><textarea name="content" placeholder="${board.content }"></textarea></td>
 				</tr>
 				
 				<tr>
@@ -91,7 +81,6 @@
 			</table>
 		</form>	
 	</main>
-	
 	<script>
 		const mnameEl		=	document.querySelector('#mname');
 		let		menunameEl	=	document.querySelector('.menu .active');

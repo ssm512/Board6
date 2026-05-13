@@ -61,7 +61,6 @@ public class BoardPagingController {
 		List<BoardDTO> list = boardPagingMapper.getBoardPagingList(
 				menu_id, searchType, keyword, offset, numOfRows);
 		
-		
 		ModelAndView mv	=	new	ModelAndView();
 		mv.setViewName("boardpaging/list"); // .jsp 
 		mv.addObject("menuList", menuList);
@@ -71,6 +70,7 @@ public class BoardPagingController {
 		mv.addObject("searchDTO", searchDTO);
 		mv.addObject("searchType", searchType);
 		mv.addObject("keyword", keyword);
+		
 		return mv;
 	}
 	// /BoardPaging/View?idx=208&menu_id=MENU01&nowpage=1
@@ -85,6 +85,12 @@ public class BoardPagingController {
 			
 			// idx로 게시글 한 개 조회
 			BoardDTO board	=	boardPagingMapper.getBoard(boardDTO);
+			
+			// content안에 있는 엔터 \n를 <br>로 변경 -> content
+			String		content	= board.getContent();
+			if (content != null)
+				board.setContent(content.replace("\n", "<br>"));
+			
 			String	menu_id	=	boardDTO.getMenu_id();
 			
 			ModelAndView   mv       =  new ModelAndView();
@@ -171,16 +177,15 @@ public class BoardPagingController {
 			// 전체 메뉴목록 : menus.jsp 용
 			List<MenuDTO>  menuList =  menuMapper.getMenuList();
 			
-			//
+			// 수정할 페이지에 출력할 자료를 idx로 조회
 			BoardDTO board = boardPagingMapper.getBoard(boardDTO);
 			
 			String menu_id	= boardDTO.getMenu_id();
-			String menu_name	=	menuMapper.getMenuName(menu_id);
 			ModelAndView mv	=	new	ModelAndView();
 			mv.setViewName("boardpaging/update");
 			mv.addObject("menuList", menuList);
+			mv.addObject("menu_id", menu_id);
 			mv.addObject("nowpage", nowpage);
-			mv.addObject("menu_name", menu_name);
 			mv.addObject("board", board);
 			return mv;
 		}
@@ -192,7 +197,7 @@ public class BoardPagingController {
 		@RequestMapping("/Update")
 		public ModelAndView update (BoardDTO boardDTO, int nowpage) {
 			
-			// db에 update
+			// 넘어온 값으로 db 정보 수정
 			boardPagingMapper.updateBoard(boardDTO);
 			
 			String menu_id	=   boardDTO.getMenu_id();

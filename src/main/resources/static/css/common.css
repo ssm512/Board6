@@ -21,7 +21,7 @@
 	
 	.red { color: red;} 
 	
-	.menu {
+	.menu, #paging {
 		td {
 			padding:0;
 			a {
@@ -41,5 +41,6 @@
 		margin: 10px;
 		text-align: center;
 	}
+	
 	
 	
